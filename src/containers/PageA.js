@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
-import styles from 'assets/main.scss'
+import styles from './PageA.module.scss'
 let cx = classNames.bind(styles);
 
 class PageA extends Component {

@@ -109,6 +109,19 @@ module.exports = function(webpackEnv) {
           sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
         },
       });
+      if(preProcessor == "sass-loader"){
+        loaders.push({
+          loader: 'sass-resources-loader',
+          options: {
+            resources: [
+              path.resolve(paths.appSrc, 'assets/scss/includes/_variable.scss'),
+              path.resolve(paths.appSrc, 'assets/scss/includes/_mixin.scss'),
+              path.resolve(paths.appSrc, 'assets/scss/common/_style-effects.scss')
+            ],
+            sourceMap: isEnvProduction && shouldUseSourceMap,
+          }
+        });
+      }
     }
     return loaders;
   };

@@ -11,9 +11,6 @@ export const history = createHistory({
 });
 
 const initialState = {
-  webState: {
-    isLoading: false
-  }
 }
 
 const enhancers = [];

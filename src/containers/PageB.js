@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
-import styles from 'assets/main.scss'
+import styles from './PageB.module.scss'
 let cx = classNames.bind(styles);
 
 class PageB extends Component {
@@ -14,7 +14,7 @@ class PageB extends Component {
   render() {
 
     return (
-      <div className={cx("page", "page-a")}>
+      <div className={cx("page", "page-b")}>
         PageB
       </div>
     )
