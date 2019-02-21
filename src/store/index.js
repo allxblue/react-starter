@@ -23,12 +23,12 @@ if (process.env.NODE_ENV === 'development') {
   }
 }
 
-history.listen(location => {
-  window.history.pushState(null, null, location.pathname);
-    window.onpopstate = function () {
-        history.go(1);
-    };
-});
+// history.listen(location => {
+//   window.history.pushState(null, null, location.pathname);
+//     window.onpopstate = function () {
+//         history.go(1);
+//     };
+// });
 
 const composedEnhancers = compose(
   applyMiddleware(...middleware),
