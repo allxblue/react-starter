@@ -1,19 +1,23 @@
 import { createStore, applyMiddleware, compose } from 'redux'
-// import { routerMiddleware } from 'connected-react-router'
-// import createHistory from 'history/createBrowserHistory'
+import { routerMiddleware } from 'connected-react-router'
+import createHistory from 'history/createBrowserHistory'
 
 import thunk from 'redux-thunk'
-import rootReducer from './reducers'
+import createRootReducer from './reducers'
+import { CONTEXT_PATH } from 'common/constants'
+
+export const history = createHistory({
+  basename: CONTEXT_PATH,
+});
 
 const initialState = {
-  intl: {
-    siteName: "your-site-name"
+  webState: {
+    isLoading: false
   }
 }
 
 const enhancers = [];
-// const middleware = [thunk, routerMiddleware(history)];
-const middleware = [thunk];
+const middleware = [thunk, routerMiddleware(history)];
 
 if (process.env.NODE_ENV === 'development') {
   const devToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION__
@@ -22,13 +26,20 @@ if (process.env.NODE_ENV === 'development') {
   }
 }
 
+history.listen(location => {
+  window.history.pushState(null, null, location.pathname);
+    window.onpopstate = function () {
+        history.go(1);
+    };
+});
+
 const composedEnhancers = compose(
   applyMiddleware(...middleware),
   ...enhancers
 )
 
 const store = createStore(
-  rootReducer,
+  createRootReducer(history),
   initialState,
   composedEnhancers
 )
